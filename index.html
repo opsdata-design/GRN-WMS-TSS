@@ -1831,36 +1831,6 @@ td.td-ean { font-size: 9.5px; }
           </details>
 
 
-          <details style="margin-bottom:10px">
-            <summary style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:7px;padding:8px 12px;background:linear-gradient(135deg,#f0fdf4,#f0fdff);border:1.5px solid rgba(8,145,178,.25);border-radius:8px;font-size:11px;font-weight:800;color:var(--teal);user-select:none">
-              <span>📗</span> Second Google Sheet Source
-              <span style="font-size:9px;color:var(--ink3);margin-left:auto;font-weight:400">(merges with Sheet 1) ▸</span>
-            </summary>
-          <div style="margin-top:6px;padding:11px 13px;background:linear-gradient(135deg,#f0fdf4,#f0fdff);border:1.5px solid rgba(8,145,178,.25);border-radius:var(--r)">
-            <div style="font-size:10px;color:var(--ink3);margin-bottom:7px;line-height:1.6">Connect a second Apps Script Web App URL. Its rows will be merged into the same inward register (duplicate Invoice Nos. are updated, unique ones are added).</div>
-            <input class="field-input" id="gsheet2-inward-url" placeholder="https://script.google.com/macros/s/…/exec  (Sheet 2)" style="width:100%;font-size:10px;padding:7px 10px;font-family:var(--font-mono);margin-bottom:6px" autocomplete="off" autocapitalize="none" spellcheck="false" oninput="onGSheet2UrlInput()">
-            <div style="margin-bottom:6px">
-              <div style="font-size:9px;color:var(--ink3);margin-bottom:4px;font-weight:700">📋 Worksheets/Tabs (comma-separated, blank = active sheet):</div>
-              <input class="field-input" id="gsheet2-inward-sheet" placeholder="e.g. GRN Register, May 2026" style="width:100%;font-size:10px;padding:5px 9px;font-family:var(--font-mono)" autocomplete="off" spellcheck="false" oninput="onGSheet2SheetInput()">
-              <div id="gs2-sheet-tags" style="display:flex;flex-wrap:wrap;gap:4px;margin-top:5px"></div>
-            </div>
-            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:7px">
-              <button class="btn btn-teal btn-sm" id="gsheet2-fetch-btn" onclick="fetchGSheet2Inward()" disabled style="flex:1;justify-content:center">⬇ Fetch Sheet 2</button>
-              <button class="btn btn-ghost btn-sm" onclick="debugGSheet2Cols()" style="font-size:10px;white-space:nowrap" title="Show raw column names from Sheet 2">🔍 Debug Cols</button>
-            </div>
-
-            <div id="gs2-livesync-strip" style="display:flex;align-items:center;gap:8px;padding:5px 10px;background:rgba(8,145,178,.06);border:1px solid rgba(8,145,178,.2);border-radius:7px;flex-wrap:wrap">
-              <span style="width:7px;height:7px;border-radius:50%;background:var(--teal);flex-shrink:0;box-shadow:0 0 6px var(--teal);animation:pulse 2s infinite"></span>
-              <span style="font-size:10px;font-weight:700;color:var(--teal)" id="gs2-sync-status">— Waiting</span>
-              <span style="font-size:9px;color:var(--ink3);margin-left:auto;font-family:var(--font-mono)" id="gs2-sync-countdown"></span>
-            </div>
-            <div id="gsheet2-status" style="display:none;margin-top:7px;font-size:10px;font-weight:700;padding:5px 10px;border-radius:6px"></div>
-            <div id="gsheet2-debug" style="display:none;margin-top:7px;background:#0d1117;border-radius:8px;padding:9px 12px;font-size:10px;color:#7ee787;font-family:monospace;line-height:1.6;word-break:break-all"></div>
-          </div>
-          </details>
-
-
-
           <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
             <div style="flex:1;height:1px;background:var(--border)"></div>
             <span style="font-size:9px;color:var(--ink3);font-weight:800;white-space:nowrap;letter-spacing:1px">OR UPLOAD FILE</span>
