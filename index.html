@@ -1737,19 +1737,43 @@ td.td-ean { font-size: 9.5px; }
     out.setMimeType(ContentService.MimeType.JSON);return out;
   }
 
+  var HEADER_HINTS=['po','ponumber','purchaseorder','invoice','invoiceno','invno','vendor','date','sku','ean','barcode','qty','quantity','carton','srno','sr.no','remark','status'];
+  function looksLikeHeaderRow(rowArr){
+    var hits=0;
+    for(var k=0;k&lt;rowArr.length;k++){
+      var c=rowArr[k];
+      if(c===''||c===null||c===undefined)continue;
+      if(typeof c==='number')continue;
+      var norm=String(c).toLowerCase().replace(/[\s._-]+/g,'');
+      for(var m=0;m&lt;HEADER_HINTS.length;m++){
+        if(norm.indexOf(HEADER_HINTS[m])!==-1){hits++;break;}
+      }
+    }
+    return hits&gt;=2;
+  }
+
   var allRows=[];
   sheets.forEach(function(sh){
     var range=sh.getDataRange();
     var data=range.getValues();
     var disp=range.getDisplayValues();
-    var headers=data[0];
+
+    var headerRowIdx=0;
+    var scanLimit=Math.min(5,data.length);
+    var found=false;
+    for(var r=0;r&lt;scanLimit;r++){
+      if(looksLikeHeaderRow(data[r])){headerRowIdx=r;found=true;break;}
+    }
+    if(!found)headerRowIdx=0;
+
+    var headers=data[headerRowIdx];
     var poIdx=-1,invIdx=-1;
     for(var j=0;j&lt;headers.length;j++){
       var h=String(headers[j]).toLowerCase().replace(/[\s._-]+/g,'');
       if(h==='pono'||h==='ponumber'||h==='purchaseorderno'||h==='po')poIdx=j;
       if(h==='invoiceno'||h==='invno'||h==='invoicenumber'||h==='invoice#'||h==='inv#')invIdx=j;
     }
-    for(var i=1;i&lt;data.length;i++){
+    for(var i=headerRowIdx+1;i&lt;data.length;i++){
       if(!data[i][0]&amp;&amp;!data[i][1])continue;
       var row={_sourceSheet:sh.getName()};
       for(var j=0;j&lt;headers.length;j++){
